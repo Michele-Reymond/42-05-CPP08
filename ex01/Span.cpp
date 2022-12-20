@@ -9,6 +9,15 @@ Span::Span(unsigned int n) : _n(n), _stock(0) {
     std::cout << "New span created with size : " << (*this->_lst).size() << std::endl;
 }
 
+Span::Span(std::vector<int>::const_iterator start, std::vector<int>::const_iterator end) : _n(0) {
+    for (std::vector<int>::const_iterator tmp = start; tmp != end; tmp++)
+        this->_n++;
+    this->_lst = new std::vector<int>(this->_n);
+    for (; start != end; start++)
+        this->addNumber(*start);
+    std::cout << "New span created with size : " << (*this->_lst).size() << std::endl;
+}
+
 Span::Span(const Span& instance) { *this = instance; }
 
 Span::~Span() {
@@ -31,14 +40,6 @@ static void displayElem(int i) {
 void Span::displayList() {
     for_each((*this->_lst).begin(), (*this->_lst).end(), displayElem);
     std::cout << std::endl;
-}
-
-void Span::fillTheList() {
-    srand (time(NULL));
-    for (int x : *this->_lst) {
-        this->addNumber(rand());
-    }
-
 }
 
 int Span::shortestSpan() {

@@ -10,13 +10,13 @@ class Span {
 
     public:
         Span(unsigned int n);
+        Span(std::vector<int>::const_iterator start, std::vector<int>::const_iterator end);
         Span(const Span& instance);
         ~Span();
 
         Span    &operator=(const Span &instance);
 
         void        addNumber(int i);
-        void        fillTheList();
         void        displayList();
         int         shortestSpan();
         int         longestSpan();
