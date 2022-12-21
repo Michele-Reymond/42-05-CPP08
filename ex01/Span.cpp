@@ -6,16 +6,18 @@ Span::Span() { }
 
 Span::Span(unsigned int n) : _n(n), _stock(0) {
     this->_lst = new std::vector<int>(n);
+     for (int i = 0; i < this->_n; i++)
+        (*this->_lst)[i] = 0;
     std::cout << "New span created with size : " << (*this->_lst).size() << std::endl;
 }
 
-Span::Span(std::vector<int>::const_iterator start, std::vector<int>::const_iterator end) : _n(0) {
+Span::Span(std::vector<int>::const_iterator start, std::vector<int>::const_iterator end) : _n(0), _stock(0) {
     for (std::vector<int>::const_iterator tmp = start; tmp != end; tmp++)
         this->_n++;
     this->_lst = new std::vector<int>(this->_n);
     for (; start != end; start++)
         this->addNumber(*start);
-    std::cout << "New span created with size : " << (*this->_lst).size() << std::endl;
+    std::cout << "New span created from range with size : " << (*this->_lst).size() << std::endl;
 }
 
 Span::Span(const Span& instance) { *this = instance; }
@@ -73,12 +75,7 @@ int Span::longestSpan() {
         throw Span::NothingFoundExeption();
     int min = *min_element(this->_lst->begin(), this->_lst->end());
     int max = *max_element(this->_lst->begin(), this->_lst->end());
-    if (min < 0 && max >= 0) {
-        return (max + min);
-    }
-    else {
-        return (max - min);
-    }
+    return (max - min);
 }
 
 
